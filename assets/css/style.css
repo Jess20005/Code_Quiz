@@ -1,0 +1,20 @@
+
+.container {
+  text-align: center;
+  margin: auto;
+  width: 500px;
+  
+  }
+
+
+  .button {
+    all:unset;
+    display: inline-block;
+    padding: .5em 1.25em;
+    background-color: rgb(107, 55, 107);
+    color: white;
+  } 
+
+  .hideDescription {
+    display: none
+  }
