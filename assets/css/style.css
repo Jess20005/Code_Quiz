@@ -1,20 +1,41 @@
+/* nav bar */
+.right {
+  float: right;
+}
+
+.left {
+  float: left;
+}
+
+#nav {
+  display: block;
+  background-color: white;
+  display: inline-block;
+  width: 98vw;
+  margin: 6px;
+}
 
 .container {
   text-align: center;
   margin: auto;
   width: 500px;
-  
   }
 
 
-  .button {
-    all:unset;
-    display: inline-block;
-    padding: .5em 1.25em;
-    background-color: rgb(107, 55, 107);
+  button {
+    border: none;
+    background-color: #7a1a7a;
     color: white;
-  } 
+    border-radius: 5px;
+    padding: 5px 8px 5px 8px;
+    font-size: 20px;
+    margin: 4px;
+}
 
+button:hover {
+    transition-duration: 0.4s;
+    background-color: #6b6b6b;
+}
   .hideDescription {
     display: none
   }

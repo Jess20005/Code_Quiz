@@ -1,61 +1,117 @@
-//WHat do expect to happen when we click on start button:
-//1-Remove game description
-//2-Display first question and answer choices
-var questionIndex = 0;
-var titleEl = document.getElementById("title");
-var startButton = document.getElementById("button");
-//What do we expect when we click on the answer choice?
-//1- Check to see if the answer is correct
-//1.1- What do we do if the answer is not correct? Then penalize the user 15 seconds
-//1.2- IF the answer is correct console log answer is correct
-//2-Display next question
-//2.1 Repeat process -check to see if answer is correct line 6
-
-function startQuiz() {
-  //1-Remove game description
-  // set a class attribute to the description
-  //2-Display first question and answer choices
-  displayQuestion();
-}
-// startButton.onclick = startQuiz;
-
-function displayQuestion() {
-  //get the right question and display to the screen
-  //1- Check to see if the answer is correct
-  //1.1- What do we do if the answer is not correct? Then penalize the user 15 seconds
-  //1.2- IF the answer is correct console log answer is correct
-  var currentQuestion = questions[questionIndex];
-  titleEl.textContent = currentQuestion.questionTitle;
-
-  // get the element for the html file
-  
-}
-
 var questions = [
   {
-    questionTitle: "What is 2*3?",
-    questionChoices: ["4", "5", "6", "7"],
-    correctAnswer: "6",
+    questionTitle: "Commonly used data types DO NOT include:",
+    questionChoices: ["strings", "booleans", "alerts", "numbers"],
+    correctAnswer: "alerts",
   },
   {
-    questionTitle: "What is 2*3?",
-    questionChoices: ["4", "5", "6", "7"],
-    correctAnswer: "6",
+    questionTitle:
+      "The condition in an if/else statement is enclosed within___________.",
+    questionChoices: [
+      "quotes",
+      "curly brackets",
+      "parenthesis",
+      "square brackets",
+    ],
+    correctAnswer: "parenthesis",
   },
   {
-    questionTitle: "What is 2*3?",
-    questionChoices: ["4", "5", "6", "7"],
-    correctAnswer: "6",
+    questionTitle: "Arrays in JavaScript can be used to store________.",
+    questionChoices: [
+      "numbers and strings",
+      "other arrays",
+      "booleans",
+      "all the above",
+    ],
+    correctAnswer: "all the above",
   },
   {
-    questionTitle: "What is 2*3?",
-    questionChoices: ["4", "5", "6", "7"],
-    correctAnswer: "6",
+    questionTitle:
+      "String values must be enclosed within ______________ when being assigned to variables.",
+    questionChoices: ["commas", "curly brackets", "quotes", "parenthesis"],
+    correctAnswer: "quotes",
   },
   {
-    questionTitle: "What is 2*3?",
-    questionChoices: ["4", "5", "6", "7"],
-    correctAnswer: "6",
+    questionTitle:
+      "A very useful tool used during development and debugging for printing content to debugger is:",
+    questionChoices: [
+      "JavaScript",
+      "terminal/bash",
+      "for loops",
+      "console log",
+    ],
+    correctAnswer: "console log",
   },
 ];
 
+var score = 0;
+var currentQuestion = 0;
+var timeLeft = 0;
+var timer;
+var totalQuestions=questions.length;
+var quizContainer = document.getElementById("quiz-container");
+var questionEl = document.getElementById("question");
+var opt1 = document.getElementById("opt1");
+var opt2 = document.getElementById("opt2");
+var opt3 = document.getElementById("opt3");
+var opt4 = document.getElementById("opt4");
+var nextBtn = document.getElementById("next");
+var startBtn = document.getElementById("start");
+var subBtn = document.getElementById("submit");
+var result = document.getElementById("result");
+
+
+//Load question and choices for user to select.
+function loadQuestion (questionIndex){
+  document.getElementById("#start");
+  var q = questions[questionIndex];
+  questionEl.textContent =((questionIndex + 1) + "." + questions);
+  opt1.textContent = q.option1;
+  opt2.textContent = q.option2;
+  opt3.textContent = q.option3;
+  opt4.textContent = q.option4;
+};
+//Go through all questions, take user option and check if that is the correct answer. If answer is correct add to score, if user is wrong go to next question. If there are not more questions stop clock and display score.
+function loadNextQuestion(){
+  var userChoice = document.querySelector('input[type=radio]:checked');
+  if(!userChoice){
+      alert("Please select answer.");
+      return;
+  }
+  var answer = userChoice.value;
+  if(questions[currentQuestion].answer === answer){
+      score += 1;
+  }
+  userChoice.checked = false;
+  currentQuestion++;
+  if (currentQuestion == totalQuestions){
+      startBtn.style.visibility='hidden';
+      nextBtn.style.visibility='hidden';
+      quizContainer.style.display="none";
+      result.style.display="";
+      result.textContent = score;
+      return;
+  }
+  loadQuestion(currentQuestion);
+}
+
+function startQuiz() {
+  document.getElementById("#start");
+    loadQuestion(currentQuestion);
+
+  timeLeft = 75;
+  document.getElementById("timeLeft").innerHTML = timeLeft;
+
+  timer = setInterval(function () {
+    timeLeft--;
+    document.getElementById("timeLeft").innerHTML = timeLeft;
+
+    if (timeLeft <= 0) {
+      clearInterval(timer);
+      endGame();
+      return;
+    }
+  }, 1000);
+
+  next();
+}
