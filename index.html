@@ -15,38 +15,24 @@
 
   <body>
     <div id="nav">
-			<div class="left">
-                <a onclick="getScore()" href="#"><h4 >View Highscore</h4></a>
-			</div>
-			<div class="right">
-				<h4>Time: <span id="timeLeft">0</span></h4>
-			</div>
-		</div>
+      <div class="left">
+        <a onclick="getScore()" href="#"><h4>View Highscore</h4></a>
+      </div>
+      <div class="right">
+        <h4>Time: <span id="timeLeft">0</span></h4>
+      </div>
+    </div>
 
-    <div class="container">
-      <div class="description">
+    <div id="quiz">
+      <div id="quizBody">
         <h1>Coding Quiz Challenge</h1>
         <p>
           Try to answer the following code-related questions within the time
           limit. Keep in mind that incorrect answers will penalize your score
-          and time by ten seconds.
+          and time by fifteen seconds.
         </p>
-        <button id="start" onclick="startQuiz();loadQuestion(currentQuestion);">Start Quiz</button>
+        <button id="start" onclick="startQuiz()">Start Quiz</button>
       </div>
-      <div class="quiz-container">
-        <div id="question" class="question">Questions</div>
-        <label class="option"><input type="radio" name="option" value="1" /><span id="opt1"></span></label>
-        <label class="option"><input type="radio" name="option" value="2" /><span id="opt2"></span></label>
-        <label class="option"><input type="radio" name="option" value="3" /><span id="opt3"></span></label>
-        <label class="option"><input type="radio" name="option" value="4" /><span id="opt4"></span></label>
-        <br>
-        <!-- <button id="start"onclick="clock();loadQuestion(currentQuestion);">Start</button> -->
-        <button id="next" onclick="loadNextQuestion();">Next</button><br>
-        <button id="submit" onclick="clearInterval(myTimer);disableButton()">Finish</button>
-        <form style="display: inline" action="highscores.html" method="get">
-                <button>Scores</button>
-             </form>
-    </div>
     </div>
   </body>
 </html>
