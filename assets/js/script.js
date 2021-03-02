@@ -1,140 +1,63 @@
+//WHat do expect to happen when we click on start button:
+//1-Remove game description
+//2-Display first question and answer choices
+var questionIndex = 0;
+var titleEl = document.getElementById("title");
+var startButton = document.getElementById("button");
+//What do we expect when we click on the answer choice?
+//1- Check to see if the answer is correct
+//1.1- What do we do if the answer is not correct? Then penalize the user 15 seconds
+//1.2- IF the answer is correct console log answer is correct
+//2-Display next question
+//2.1 Repeat process -check to see if answer is correct line 6
+
+function startQuiz() {
+  //1-Remove game description
+  // set a class attribute to the description
+  //2-Display first question and answer choices
+  displayQuestion();
+}
+// startButton.onclick = startQuiz;
+
+function displayQuestion() {
+  //get the right question and display to the screen
+  //1- Check to see if the answer is correct
+  //1.1- What do we do if the answer is not correct? Then penalize the user 15 seconds
+  //1.2- IF the answer is correct console log answer is correct
+  var currentQuestion = questions[questionIndex];
+  titleEl.textContent = currentQuestion.questionTitle;
+
+  // get the element for the html file
+
+}
+
 var questions = [
   {
-    title: "Commonly used data types DO NOT include:",
-    questionChoices: ["strings", "booleans", "alerts", "numbers"],
-    correctAnswer:"alerts",
+    questionTitle: "What is 2*3?",
+    questionChoices: ["4", "5", "6", "7"],
+    correctAnswer: "6",
   },
   {
-    title: "The condition in an if/else statement is enclosed within___________.",
-    questionChoices: ["quotes","curly brackets","parenthesis","square brackets"],
-    correctAnswer:"parenthesis",
+    questionTitle: "What is 2*3?",
+    questionChoices: ["4", "5", "6", "7"],
+    correctAnswer: "6",
   },
   {
-    title: "Arrays in JavaScript can be used to store________.",
-    questionChoices: ["numbers and strings","other arrays","booleans","all the above"],
-    correctAnswer:"all the above",
+    questionTitle: "What is 2*3?",
+    questionChoices: ["4", "5", "6", "7"],
+    correctAnswer: "6",
   },
   {
-    title:"String values must be enclosed within ______________ when being assigned to variables.",
-    questionChoices: ["commas", "curly brackets", "quotes", "parenthesis"],
-    correctAnswer: "quotes",
+    questionTitle: "What is 2*3?",
+    questionChoices: ["4", "5", "6", "7"],
+    correctAnswer: "6",
   },
   {
-    title:"A very useful tool used during development and debugging for printing content to debugger is:",
-    questionChoices: ["JavaScript","terminal/bash","for loops","console log"],
-    correctAnswer: "console log",
+    questionTitle: "What is 2*3?",
+    questionChoices: ["4", "5", "6", "7"],
+    correctAnswer: "6",
   },
 ];
 
-var score = 20;
-var currentQuestion = -1;
-var timeLeft = 0;
-var timer;
 
-//1-Start quiz and timer
-function startQuiz() {
-  timeLeft = 75;
-  document.getElementById("timeLeft").innerHTML = timeLeft;
 
-  timer = setInterval(function () {
-    timeLeft--;
-    document.getElementById("timeLeft").innerHTML = timeLeft;
-
-    if (timeLeft <= 0) {
-      clearInterval(timer);
-      endGame();
-      return;
-    }
-  }, 1000);
-
-  next();
-}
-
-//end game and final display screen
-function endGame() {
-  clearInterval(timer);
-
-  var quizContent =` <h2>All done!</h2>
-  <h3>Your score is ` + score + ` .</h3>
-  Enter initals: <input type="text" id="name" placeholder=""> 
-  <button onclick="setScore()">Submit</button>`;
-
-  document.getElementById("quizBody").innerHTML = quizContent;
-}
-
-//local storage for highscore
-function setScore() {
-  localStorage.setItem("highscore", score);
-  localStorage.setItem("highscoreName", document.getElementById("name").value);
-  getScore();
-}
-
-function getScore() { var quizContent =` <h2>` + localStorage.getItem("highscoreName") +`'s highscore is:</h2>
-  <h1>` + localStorage.getItem("highscore") + `</h1><br> 
-  <button onclick="clearScore()">Clear score!</button><button onclick="restartQuiz()">Play Again!</button>`;
-  document.getElementById("quizBody").innerHTML = quizContent;
-}
-
-function clearScore() {
-  localStorage.setItem("highscore", "");
-  localStorage.setItem("highscoreName", "");
-  restartQuiz();
-}
-
-function restartQuiz() {
-  clearInterval(timer);
-  score = 0;
-  currentQuestion = -1;
-  timeLeft = 0;
-  timer = null;
-
-  document.getElementById("timeLeft").innerHTML = timeLeft;
-
-  var quizContent = `<h1> Coding Quiz Challenge </h1>
-    <button onclick="startQuiz()">Start Quiz</button>`;
-  document.getElementById("quizBody").innerHTML = quizContent;
-}
-
-//deducts 15 seconds from the timer if user chooses an incorrect answer
-function incorrect() {
-  timeLeft -= 15;
-  next();
-}
-
-//increases the score by 20points if the user chooses the correct answer
-function correct() {
-  score += 20;
-  next();
-}
-
-//loops through the questions
-function next() {
-  currentQuestion++;
-  if (currentQuestion > questions.length - 1) {
-    endGame();
-    return;
-  }
-  var quizContent = questions[currentQuestion].title;
-
-  for (
-    var buttonLoop = 0;
-    buttonLoop < questions[currentQuestion].questionChoices.length;
-    buttonLoop++
-  ) {
-    var buttonCode = '<button onclick="[ANS]">[CHOICE]</button>';
-    buttonCode = buttonCode.replace(
-      "[CHOICE]",
-      questions[currentQuestion].questionChoices[buttonLoop]
-    );
-    if (
-      questions[currentQuestion].questionChoices[buttonLoop] ==
-      questions[currentQuestion].questionAnswer
-    ) {
-      buttonCode = buttonCode.replace("[ANS]", "correct()");
-    } else {
-      buttonCode = buttonCode.replace("[ANS]", "incorrect()");
-    }
-    quizContent += buttonCode;
-  }
-  document.getElementById("quizBody").innerHTML = quizContent;
-}
