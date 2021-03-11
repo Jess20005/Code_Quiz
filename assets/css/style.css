@@ -13,15 +13,6 @@
   float: right;
 }
 
-/* #start {
-  all: unset;
-  display: inline-block;
-  padding: .5em 1.25em;
-  font-size: 20px;
-  font-weight: bold;
-  color:white;
-}  
-  /* background-color: rgb(107, 55, 107); */
 
 button {
   display: inline-block;
@@ -35,7 +26,3 @@ button {
   border: 0;
   transition: background-color 0.1s;
 }
-
-  .hideDescription {
-    display: none
-  }

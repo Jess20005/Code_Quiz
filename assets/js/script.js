@@ -50,13 +50,15 @@ var lastQuestionIndex = questions.length - 1;
 startButton.onclick = startQuiz;
 
 function startQuiz() {
+  $("p").hide();
+  $("#start").hide();
   // console.log("This is coming from start quiz")
   timeLeft = 75;
   document.getElementById("timeLeft").innerHTML = timeLeft;
 
   if (timeLeft <= timer) {
     timeLeft.innerHTML = timeLeft;
-    timeLeft++;
+    timeLeft--;
   } else {
     timeLeft = 0;
     // wrongAnswer();
@@ -71,7 +73,18 @@ function startQuiz() {
   displayQuestion();
 }
 
-timer= setInterval(startQuiz,1000);
+// timer= setInterval(startQuiz,1000);
+
+function showScore() {
+  clearInterval(timer);
+
+  var results =` <h2>All done!</h2>
+  <h3>Your final score is ` + score + ` .</h3>
+  Enter initals: <input type="text" id="name" placeholder=""> 
+  <button onclick="highscore()">Submit</button>`;
+
+  document.getElementById("quizBody").innerHTML = results;
+}
 
 function showStatusText(status) {
   questionStatus.style.visibility = "visible";
